@@ -1,11 +1,12 @@
 /* Aplicacion para calcular el importe total y unitario en cuotas.
    Mas adelante compararé ese importe contra el importe de pago de contado.*/
 
-let importe_contado;
-let importe_en_cuotas;
-let numero_cuotas;
-
 function calculo_cuotas(){
+
+    let importe_contado;
+    let importe_en_cuotas;
+    let numero_cuotas;
+    
     do{
     importe_contado = prompt("Ingrese importe a pagar en contado");
     }
