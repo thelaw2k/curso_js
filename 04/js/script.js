@@ -26,7 +26,12 @@ function calculo_cuotas(){
     alert("Importe Total $" + importe_en_cuotas + " en " + numero_cuotas + " cuotas de $" + importe_cuota);
 
     numero_cuotas = Number(numero_cuotas);
+    let inicio = Date.now();
+
     for(i=1;i<numero_cuotas+1;i++){
         console.log("Cuota nro " + i + ": $" + importe_cuota);
     }
+    let final = Date.now();
+    let ejecucion =  final - inicio;
+    console.log("Tiempo de ejecucion del for "+ ejecucion + " milisegundos.")
 }
