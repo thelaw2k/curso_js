@@ -71,5 +71,4 @@ function calculo_cuotas(){
     }while(busqueda_cuota.trim() == "")
 
     console.log(arr_cuotas[busqueda_cuota]);
-
 }
