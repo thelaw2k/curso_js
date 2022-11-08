@@ -3,6 +3,7 @@
 function calculo_cuotas(){
 
     let acumulado = 0;
+    let arr_cuotas = [""];
     
     do{
         n1 = prompt("Ingrese Capital","10000");
@@ -55,9 +56,20 @@ function calculo_cuotas(){
     // Muestro los datos de cada cuota
     for(i=1;i<Number(credito.numero_cuotas)+1;i++){
         console.log("Cuota nro "+ i +": Capital $"+ credito.capitalXcuota() +" Interes $"+ credito.interesXcuota() +" Total $"+ (credito.importeXcuota())+" Acumulado $"+ Acumular(credito.importeXcuota()).toFixed(2));
+
+        // Creo Array para buscar la cuota luego de hacer los calculos
+        arr_cuotas.push("Cuota nro "+ i +": Capital $"+ credito.capitalXcuota() +" Interes $"+ credito.interesXcuota() +" Total $"+ (credito.importeXcuota()));//+" Acumulado $"+ Acumular(credito.importeXcuota()).toFixed(2));
+
     }
 
     let final = Date.now();
     let ejecucion =  final - inicio;
-    console.log("Tiempo de ejecucion del for "+ ejecucion + " milisegundos.")   
+    console.log("Tiempo de ejecucion del for "+ ejecucion + " milisegundos.")
+
+    do{
+        busqueda_cuota = prompt("Ingrese el numero de cuota que quiere ver","1");
+    }while(busqueda_cuota.trim() == "")
+
+    console.log(arr_cuotas[busqueda_cuota]);
+
 }
