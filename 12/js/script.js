@@ -1,26 +1,35 @@
 // Aplicacion para calcular el importe total y unitario en cuotas en base a una tasa de interes
 
-function calculo_cuotas(){
+//Oculto el div que muestra el formulario y los resultados
+document.getElementById("contenido").hidden = true;
+document.getElementById("pantalla1").hidden = true;
+document.getElementById("pantalla2").hidden = true;
 
+//Funcion que se ejecuta cuando inciamos la aplicacion
+//Oculta boton de inicio y muestra el formulario
+//solo para demostrar como interactuo con el DOM
+function comienza_ejecucion(){
+    document.getElementById("footer").hidden = true;
+    document.getElementById("contenido").hidden = false;
+    document.getElementById("pantalla0").hidden = false;
+    document.getElementById("pantalla1").hidden = true;
+    document.getElementById("pantalla2").hidden = true;
+    document.getElementById("pantalla1").innerHTML = "";
+    document.getElementById("pantalla2").innerHTML = "";
+}
+
+function calculo_cuotas(){
+    //inicio variables y arrays y prevengo el Submit del formulario
+    event.preventDefault();
     let acumulado = 0;
     let arr_cuotas = [""];
     let credito_completo = "";
 
-    //Hago desaparecer el texto y boton de inicio, solo para demostrar como interactuo con el DOM
-    document.getElementById("principal").hidden = true;
-    document.getElementById("boton").hidden = true;
+    // Recupero los valores de los inputs
+    n1 = document.forms["formulario"]["capital"].value;
+    n2 = document.forms["formulario"]["cant_cuotas"].value;
+    n3 = document.forms["formulario"]["tasa_interes"].value;
 
-    do{
-        n1 = prompt("Ingrese Capital","10000");
-    }while(n1.trim() == "")
-
-    do{
-        n2 = prompt("Ingrese la cantidad de cuotas","12");
-    }while(n2.trim() == "")
-
-    do{
-        n3 = prompt("Ingrese tasa de interes","7.5");
-    }while(n3.trim() == "")
 
     //Creo Objeto con propiedades y funciones
     const credito = {
@@ -49,23 +58,19 @@ function calculo_cuotas(){
     const creditojson = JSON.stringify(credito);
     localStorage.setItem("creditoMem", creditojson);
 
-
-    //Convierto el JSON en objeto y lo mando al DOM
+    //Convierto el JSON en objeto y lo mando al DOM en DIV pantalla1
     const creditoObj = JSON.parse(localStorage.getItem("creditoMem"));
-    document.getElementById("pantalla2").innerHTML = creditoObj.importe_capital+" Se muestra desde LocalStorage";
+    document.getElementById("pantalla1").innerHTML = creditoObj.importe_capital+" Se muestra desde LocalStorage<br />" + credito.presentacion();
     
 
     //Ejecuto una funcion del objeto
-    document.getElementById("pantalla0").innerHTML = credito.presentacion();
-    //console.log("capitalXcuota: "+credito.capitalXcuota());
-    //console.log("interesXcuota: "+credito.interesXcuota());
-    //console.log("importeXcuota: "+credito.importeXcuota());
-
+    //document.getElementById("pantalla1").innerHTML = ;
 
     function Acumular(imp){
         return acumulado += Number(imp);
     }
   
+    // Inicio contador de tiempo para saber el tiempo de ejecucion del script
     let inicio = Date.now();
     
     // Muestro los datos de cada cuota
@@ -74,20 +79,27 @@ function calculo_cuotas(){
 
         // Creo Array para buscar la cuota luego de hacer los calculos
         arr_cuotas.push("Cuota nro "+ i +": Capital $"+ credito.capitalXcuota() +" Interes $"+ credito.interesXcuota() +" Total $"+ (credito.importeXcuota()));//+" Acumulado $"+ Acumular(credito.importeXcuota()).toFixed(2));
-
     }
 
-    document.getElementById("pantalla1").innerHTML = credito_completo
+    document.getElementById("pantalla2").innerHTML = credito_completo
 
+    // Muestro resultados, el boton de inicio nuevamente y oculto el formulario
+    document.getElementById("pantalla1").hidden = false;
+    document.getElementById("pantalla2").hidden = false;
+    document.getElementById("footer").hidden = false;
+    document.getElementById("pantalla0").hidden = true;
+
+    // Finalizo contador de tiempo e imprimo el resultado en la consola
     let final = Date.now();
     let ejecucion =  final - inicio;
     console.log("Tiempo de ejecucion del for "+ ejecucion + " milisegundos.")
 
-    do{
-        busqueda_cuota = prompt("Ingrese el numero de cuota que quiere ver","1");
-    }while(busqueda_cuota.trim() == "")
 
-    document.getElementById("pantalla2").innerHTML = arr_cuotas[busqueda_cuota];
 
-    document.getElementById("boton").hidden = false;
+
+
+//    do{
+//        busqueda_cuota = prompt("Ingrese el numero de cuota que quiere ver","1");
+//    }while(busqueda_cuota.trim() == "")
+//    document.getElementById("pantalla2").innerHTML = arr_cuotas[busqueda_cuota];
 }

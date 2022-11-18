@@ -4,23 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="js/script.js"></script>
+    <title>3 Pre-entrega curso JS</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<div>
-    <div id="principal">
-        <h1>Simulador de Prestamos</h1>
-        <h3>Calculo del valor de cada cuota ingrsando capital, cantidad de cuotas y tasa de interes.</h3>
-    </div>
-    <div id="pantalla0"></div>
-    <div id="pantalla1"></div>
-    <div id="pantalla2"></div>
 
-    <div id="boton">
-        <button onclick="calculo_cuotas()">Iniciar</button>
+<div class="grid-container" id="principal">
+    <div id="header">
+        <h1>Simulador de Prestamos</h1>
+        <h3>Calculo del valor de cada cuota ingresando capital, cantidad de cuotas y tasa de interes.</h3>
+    </div>
+    <div class="contenido" id="contenido">
+       
+        <div id="pantalla0" class="p0">
+            <form name="formulario" onsubmit="return calculo_cuotas()">
+                <label for="fname">Ingrese Capital:</label><br>
+                <input type="number" id="capital" name="capital" value="10000" min="1" max="99999999999" required><br>
+                <label for="lname">Ingrese la cantidad de cuotas:</label><br>
+                <input type="number" id="cant_cuotas" name="cant_cuotas" value="12" min="1" max="9999" required><br><br>
+                <label for="lname">Ingrese tasa de interes:</label><br>
+                <input type="number" id="tasa_interes" name="tasa_interes" value="7" min="1" max="999" required><br><br>
+                <input type="submit" value="Calcular" class="boton">
+              </form>
+        </div>
+        
+        <div id="pantalla1" class="p1"></div>
+        <div id="pantalla2" class="p2"></div>
+    </div>
+    <div id="footer">
+        <button onclick="comienza_ejecucion()" class="boton">Iniciar</button>
     </div>
 </div>    
+
+<script src="js/script.js"></script>
 
 </body>
 </html>
