@@ -59,13 +59,11 @@ function calculo_cuotas(){
     localStorage.setItem("creditoMem", creditojson);
 
     //Convierto el JSON en objeto y lo mando al DOM en DIV pantalla1
+    //Ejecuto una funcion del objeto
     const creditoObj = JSON.parse(localStorage.getItem("creditoMem"));
     document.getElementById("pantalla1").innerHTML = creditoObj.importe_capital+" Se muestra desde LocalStorage<br />" + credito.presentacion();
     
-
-    //Ejecuto una funcion del objeto
-    //document.getElementById("pantalla1").innerHTML = ;
-
+    // Acumulo importes de cuotas para mostrar el total pagado en cada una de las cuotas
     function Acumular(imp){
         return acumulado += Number(imp);
     }
@@ -93,13 +91,4 @@ function calculo_cuotas(){
     let final = Date.now();
     let ejecucion =  final - inicio;
     console.log("Tiempo de ejecucion del for "+ ejecucion + " milisegundos.")
-
-
-
-
-
-//    do{
-//        busqueda_cuota = prompt("Ingrese el numero de cuota que quiere ver","1");
-//    }while(busqueda_cuota.trim() == "")
-//    document.getElementById("pantalla2").innerHTML = arr_cuotas[busqueda_cuota];
 }
